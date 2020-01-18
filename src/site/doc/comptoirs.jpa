@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entity-mappings v="5.3" rws="_157927939898152" Pws="_157927939898152" cws="_157927939898152" thm="PNBColorScheme" persistenceUnitName="DEFAULT_PU" sm="false" xs="false" id="_15792793972071" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <entity compositePrimaryKeyType="D" compositePrimaryKeyClass="LignePK" abs="false" class="Ligne" v="true" xre="false" m="false" rootElement="_15792793972071" id="_15792793972272">
+        <attributes>
+            <basic optional="false" attribute-type="short" v="true" name="quantite" id="_15792793972469">
+                <column name="QUANTITE" unique="false" nullable="false" insertable="true" updatable="true" table="LIGNE"/>
+            </basic>
+            <many-to-one optional="false" primaryKey="false" connected-entity-id="_15792793972294" connected-attribute-id="_157927939725034" v="true" name="commande1" id="_157927939724710">
+                <join-column name="COMMANDE" rc="NUMERO" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </many-to-one>
+            <many-to-one optional="false" primaryKey="false" connected-entity-id="_15792793972293" connected-attribute-id="_157927939724921" v="true" name="produit1" id="_157927939724711">
+                <join-column name="PRODUIT" rc="REFERENCE" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </many-to-one>
+            <id attribute-type="int" v="true" name="commande" id="_15792793972447">
+                <column name="COMMANDE" unique="false" nullable="false" insertable="true" updatable="true" table="LIGNE"/>
+            </id>
+            <id attribute-type="int" v="true" name="produit" id="_15792793972468">
+                <column name="PRODUIT" unique="false" nullable="false" insertable="true" updatable="true" table="LIGNE"/>
+            </id>
+        </attributes>
+        <table name="LIGNE"/>
+    </entity>
+    <entity compositePrimaryKeyClass="ProduitPK" abs="false" class="Produit" v="true" xre="false" m="false" rootElement="_15792793972071" id="_15792793972293">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" name="nom" id="_157927939724813">
+                <column name="NOM" unique="false" nullable="false" insertable="true" updatable="true" table="PRODUIT" length="40"/>
+            </basic>
+            <basic optional="false" attribute-type="int" v="true" name="fournisseur" id="_157927939724814">
+                <column name="FOURNISSEUR" unique="false" nullable="false" insertable="true" updatable="true" table="PRODUIT"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="quantiteParUnite" id="_157927939724815">
+                <column name="QUANTITE_PAR_UNITE" unique="false" nullable="true" insertable="true" updatable="true" table="PRODUIT" length="30"/>
+            </basic>
+            <basic optional="false" attribute-type="java.math.BigDecimal" v="true" name="prixUnitaire" id="_157927939724816">
+                <column name="PRIX_UNITAIRE" unique="false" nullable="false" insertable="true" updatable="true" table="PRODUIT" precision="18" scale="2"/>
+            </basic>
+            <basic optional="false" attribute-type="short" v="true" name="unitesEnStock" id="_157927939724817">
+                <column name="UNITES_EN_STOCK" unique="false" nullable="false" insertable="true" updatable="true" table="PRODUIT"/>
+            </basic>
+            <basic optional="false" attribute-type="short" v="true" name="unitesCommandees" id="_157927939724818">
+                <column name="UNITES_COMMANDEES" unique="false" nullable="false" insertable="true" updatable="true" table="PRODUIT"/>
+            </basic>
+            <basic optional="false" attribute-type="short" v="true" name="niveauDeReappro" id="_157927939724819">
+                <column name="NIVEAU_DE_REAPPRO" unique="false" nullable="false" insertable="true" updatable="true" table="PRODUIT"/>
+            </basic>
+            <basic optional="false" attribute-type="short" v="true" name="indisponible" id="_157927939724820">
+                <column name="INDISPONIBLE" unique="false" nullable="false" insertable="true" updatable="true" table="PRODUIT"/>
+            </basic>
+            <many-to-one optional="false" primaryKey="false" connected-entity-id="_15792793972295" connected-attribute-id="_157927939725039" v="true" name="categorie" id="_157927939724922">
+                <join-column name="CATEGORIE" rc="CODE" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </many-to-one>
+            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_15792793972272" connected-attribute-id="_157927939724711" v="true" name="ligneCollection" id="_157927939724921"/>
+            <id attribute-type="Integer" v="true" name="reference" id="_157927939724712">
+                <column name="REFERENCE" unique="false" nullable="false" insertable="true" updatable="true" table="PRODUIT"/>
+                <generated-value strategy="DEFAULT"/>
+            </id>
+        </attributes>
+        <table name="PRODUIT">
+            <unique-constraint>
+                <column-name>NOM</column-name>
+            </unique-constraint>
+        </table>
+    </entity>
+    <entity compositePrimaryKeyClass="CommandePK" abs="false" class="Commande" v="true" xre="false" m="false" rootElement="_15792793972071" id="_15792793972294">
+        <attributes>
+            <basic optional="false" attribute-type="java.util.Date" v="true" name="saisieLe" id="_157927939724924">
+                <temporal>DATE</temporal>
+                <column name="SAISIE_LE" unique="false" nullable="false" insertable="true" updatable="true" table="COMMANDE"/>
+            </basic>
+            <basic optional="true" attribute-type="java.util.Date" v="true" name="envoyeeLe" id="_157927939725025">
+                <temporal>DATE</temporal>
+                <column name="ENVOYEE_LE" unique="false" nullable="true" insertable="true" updatable="true" table="COMMANDE"/>
+            </basic>
+            <basic optional="true" attribute-type="java.math.BigDecimal" v="true" name="port" id="_157927939725026">
+                <column name="PORT" unique="false" nullable="true" insertable="true" updatable="true" table="COMMANDE" precision="18" scale="2"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="destinataire" id="_157927939725027">
+                <column name="DESTINATAIRE" unique="false" nullable="true" insertable="true" updatable="true" table="COMMANDE" length="40"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="adresseLivraison" id="_157927939725028">
+                <column name="ADRESSE_LIVRAISON" unique="false" nullable="true" insertable="true" updatable="true" table="COMMANDE" length="60"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="villeLivraison" id="_157927939725029">
+                <column name="VILLE_LIVRAISON" unique="false" nullable="true" insertable="true" updatable="true" table="COMMANDE" length="15"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="regionLivraison" id="_157927939725030">
+                <column name="REGION_LIVRAISON" unique="false" nullable="true" insertable="true" updatable="true" table="COMMANDE" length="15"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="codePostalLivrais" id="_157927939725031">
+                <column name="CODE_POSTAL_LIVRAIS" unique="false" nullable="true" insertable="true" updatable="true" table="COMMANDE" length="10"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="paysLivraison" id="_157927939725032">
+                <column name="PAYS_LIVRAISON" unique="false" nullable="true" insertable="true" updatable="true" table="COMMANDE" length="15"/>
+            </basic>
+            <basic optional="false" attribute-type="java.math.BigDecimal" v="true" name="remise" id="_157927939725033">
+                <column name="REMISE" unique="false" nullable="false" insertable="true" updatable="true" table="COMMANDE" precision="10" scale="2"/>
+            </basic>
+            <many-to-one optional="false" primaryKey="false" connected-entity-id="_15792793972296" connected-attribute-id="_157927939725151" v="true" name="client" id="_157927939725035">
+                <join-column name="CLIENT" rc="CODE" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </many-to-one>
+            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_15792793972272" connected-attribute-id="_157927939724710" v="true" name="ligneCollection" id="_157927939725034"/>
+            <id attribute-type="Integer" v="true" name="numero" id="_157927939724923">
+                <column name="NUMERO" unique="false" nullable="false" insertable="true" updatable="true" table="COMMANDE"/>
+                <generated-value strategy="DEFAULT"/>
+            </id>
+        </attributes>
+        <table name="COMMANDE"/>
+    </entity>
+    <entity compositePrimaryKeyClass="CategoriePK" abs="false" class="Categorie" v="true" xre="false" m="false" rootElement="_15792793972071" id="_15792793972295">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" name="libelle" id="_157927939725037">
+                <column name="LIBELLE" unique="false" nullable="false" insertable="true" updatable="true" table="CATEGORIE" length="25"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="description" id="_157927939725038">
+                <column name="DESCRIPTION" unique="false" nullable="true" insertable="true" updatable="true" table="CATEGORIE" length="255"/>
+            </basic>
+            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_15792793972293" connected-attribute-id="_157927939724922" v="true" name="produitCollection" id="_157927939725039"/>
+            <id attribute-type="Integer" v="true" name="code" id="_157927939725036">
+                <column name="CODE" unique="false" nullable="false" insertable="true" updatable="true" table="CATEGORIE"/>
+                <generated-value strategy="DEFAULT"/>
+            </id>
+        </attributes>
+        <table name="CATEGORIE">
+            <unique-constraint>
+                <column-name>LIBELLE</column-name>
+            </unique-constraint>
+        </table>
+    </entity>
+    <entity compositePrimaryKeyClass="ClientPK" abs="false" class="Client" v="true" xre="false" m="false" rootElement="_15792793972071" id="_15792793972296">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" name="societe" id="_157927939725141">
+                <column name="SOCIETE" unique="false" nullable="false" insertable="true" updatable="true" table="CLIENT" length="40"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="contact" id="_157927939725142">
+                <column name="CONTACT" unique="false" nullable="true" insertable="true" updatable="true" table="CLIENT" length="30"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="fonction" id="_157927939725143">
+                <column name="FONCTION" unique="false" nullable="true" insertable="true" updatable="true" table="CLIENT" length="30"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="adresse" id="_157927939725144">
+                <column name="ADRESSE" unique="false" nullable="true" insertable="true" updatable="true" table="CLIENT" length="60"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="ville" id="_157927939725145">
+                <column name="VILLE" unique="false" nullable="true" insertable="true" updatable="true" table="CLIENT" length="15"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="region" id="_157927939725146">
+                <column name="REGION" unique="false" nullable="true" insertable="true" updatable="true" table="CLIENT" length="15"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="codePostal" id="_157927939725147">
+                <column name="CODE_POSTAL" unique="false" nullable="true" insertable="true" updatable="true" table="CLIENT" length="10"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="pays" id="_157927939725148">
+                <column name="PAYS" unique="false" nullable="true" insertable="true" updatable="true" table="CLIENT" length="15"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="telephone" id="_157927939725149">
+                <column name="TELEPHONE" unique="false" nullable="true" insertable="true" updatable="true" table="CLIENT" length="24"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="fax" id="_157927939725150">
+                <column name="FAX" unique="false" nullable="true" insertable="true" updatable="true" table="CLIENT" length="24"/>
+            </basic>
+            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_15792793972294" connected-attribute-id="_157927939725035" v="true" name="commandeCollection" id="_157927939725151"/>
+            <id attribute-type="String" v="true" name="code" id="_157927939725140">
+                <column name="CODE" unique="false" nullable="false" insertable="true" updatable="true" table="CLIENT" length="5"/>
+            </id>
+        </attributes>
+        <table name="CLIENT">
+            <unique-constraint>
+                <column-name>SOCIETE</column-name>
+            </unique-constraint>
+        </table>
+    </entity>
+    <wsl>
+        <ws n="Main" id="_157927939898152">
+            <i ref="_15792793972296" x="93" y="20"/>
+            <i ref="_15792793972272" x="504" y="181"/>
+            <i ref="_15792793972294" x="302" y="20"/>
+            <i ref="_15792793972295" x="482" y="20"/>
+            <i ref="_15792793972293" x="678" y="20"/>
+        </ws>
+    </wsl>
+</entity-mappings>

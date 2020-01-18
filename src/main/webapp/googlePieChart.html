@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+	<title>Visualisation Google</title>
+	<meta charset="UTF-8">
+	<!-- On charge JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- On charge l'API Google -->
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		// cf. https://developers.google.com/chart/interactive/docs/gallery/piechart
+		google.charts.load('current', {'packages': ['corechart']});
+
+		// On fait l'appel AJAX dès le chargement de la page
+		google.charts.setOnLoadCallback(doAjax);
+
+		function drawPiechart(result) {
+			// On ajoute la description des colonnes
+			result.unshift(['Catégorie', 'Unités vendues']);
+			var data = google.visualization.arrayToDataTable(result);
+			var options = {title: 'Unités vendues par catégorie'};
+
+			var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+			chart.draw(data, options);
+		}
+
+		// Afficher les ventes par client
+		function doAjax() {
+			$.ajax({
+				url: "mvc/unitesVenduesParCategorie",
+				dataType: "json",
+				success: drawPiechart, // La fonction qui traite les résultats
+				error: showError
+			});
+		}
+
+		// Fonction qui traite les erreurs de la requête
+		function showError(xhr, status, message) {
+			alert("Erreur: " + status + " : " + message);
+		}
+
+	</script>
+</head>
+<body>
+	<h1>Exemple d'utilisation des <a href="https://developers.google.com/chart/interactive/docs/gallery/piechart" target="_blank">visualisations Google (Piechart)</a></h1>
+	<!-- Le graphique apparaît ici -->
+	<div id="piechart" style="width: 900px; height: 500px;"></div>
+	<hr>
+	<a href='mvc/unitesVenduesParCategorie' target="_blank">Voir les données brutes (JSON)</a>
+	<hr>
+	<a href="./">Retour au menu</a>
+
+</body>

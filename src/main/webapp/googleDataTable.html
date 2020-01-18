@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+	<title>Visualisation Google</title>
+	<meta charset="UTF-8">
+	<script src="js/xml2jsobj.js"></script>
+	<!-- On charge JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- On charge l'API Google -->
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		// cf. https://developers.google.com/chart/interactive/docs/gallery/table
+		google.charts.load('current', {'packages': ['table']});
+		// On fait l'appel AJAX dès le chargement de la page
+		google.charts.setOnLoadCallback(doAjax);
+
+		function drawTable(categorieArray) {
+			// On reformate le résultat comme un tableau
+			var chartData = [];
+			for (var i in categorieArray) {
+				chartData.push([categorieArray[i].code, categorieArray[i].description, categorieArray[i].libelle]);
+			}
+
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Code');
+			data.addColumn('string', 'Description');
+			data.addColumn('string', 'Libellé');
+			data.addRows(chartData);
+
+			var table = new google.visualization.Table(document.getElementById('table_div'));
+			table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
+		}
+
+		// Afficher les ventes par client
+		function doAjax() {
+			$.ajax({
+				url: "mvc/allCategories",
+				dataType: "xml",
+				success: // La fonction qui traite les résultats
+					function (result) {
+						var categories = XML2jsobj(result.documentElement);
+						// On dessine le graphique
+						drawTable(categories.categorie);
+					},
+				error: showError
+			});
+		}
+
+		// Fonction qui traite les erreurs de la requête
+		function showError(xhr, status, message) {
+			alert("Erreur: " + status + " : " + message);
+		}
+
+	</script>
+</head>
+<body>
+	<h1>Exemple d'utilisation des <a href="https://developers.google.com/chart/interactive/docs/gallery/table" target="_blank">visualisations Google (table)</a></h1>
+	<!-- Le graphique apparaît ici -->
+	<div id="table_div"></div>
+	<hr>
+	<a href='mvc/allCategories' target="_blank">Voir les données brutes (XML)</a>
+	<hr>
+	<a href="./">Retour au menu</a>
+
+</body>

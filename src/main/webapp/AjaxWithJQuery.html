@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ajax avec JQuery et Mustache</title>
+		<meta charset="UTF-8">
+
+		<!-- On charge la bibliothèque JQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+		<!-- On charge le moteur de template mustache https://mustache.github.io/ -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>		
+
+		<!-- Script qui convertit du XML en objet javascript  -->		
+		<script src="js/xml2jsobj.js"></script>
+
+		<script>
+			$(document).ready(// Exécuté à la fin du chargement de la page
+				function () {
+					// Quand on clique sur le bouton doAjax, on exécute la fonction doRequest
+					$("#doAjax").click(doRequest);
+				}
+			);
+
+			// Fonction qui traite les résultats de la requête
+			function showResult(resultXML) {
+				console.log(resultXML); // On affiche dans la console les données reçues (XML)
+				var categories = XML2jsobj(resultXML.documentElement); // On convertit en objet JS
+				console.log(categories); // On affiche dabs la console
+				// Le code source du template est dans la page
+				var template = $('#categoriesTemplate').html();
+				// On combine le template avec le résultat de la requête
+				var processedTemplate = Mustache.to_html(template, { records: categories.categorie });
+				// On affiche le résultat dans la page
+				$('#tableCategories').html(processedTemplate);	
+				// On réactive le bouton
+				$("#doAjax").prop("disabled", false);
+			}
+
+			// Fonction qui traite les erreurs de la requête
+			function showError(xhr, status, message) {
+				$("#tableCategories").html("Erreur: " + status + " : " + message);
+			}
+
+			// Fonction qui fait l'appel AJAX
+			function doRequest() {
+				$.ajax({
+					url: "mvc/allCategories",
+					dataType: "xml",
+					success: showResult,
+					error: showError
+				});
+				// On désactive le bouton
+				$("#doAjax").prop("disabled", true);
+			}
+		</script>        
+	</head>
+	<body>
+		<button id="doAjax">Exécuter la requête AJAX</button><br>
+		
+		<div id="tableCategories">...Le résultat va apparaître ici...</div>
+		<hr>
+		
+		<a href="./">Retour au menu</a>
+		
+		<!-- Le template qui sert à formatter la liste des catégories -->
+		<script id="categoriesTemplate" type="text/template">
+			<h2>Liste des catégories</h2>
+			<TABLE BORDER="1">
+				{{! Un commentaire Mustache }}
+				<TR><TH>Code</TH><TH>Libelle</TH><TH>Description</TH></TR>
+				{{! Pour chaque enregistrement }}
+				{{#records}}
+					{{! Une ligne dans la table }}
+					<TR><TD>{{code}}</TD><TD>{{libelle}}</TD><TD>{{description}}</TD></TR>
+				{{/records}}
+			</TABLE>
+		</script>	
+	</body>
+</html>
