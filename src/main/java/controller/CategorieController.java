@@ -14,15 +14,14 @@ import javax.ws.rs.Path;
 @Path("categories")
 @View("showAllCategories.jsp")
 public class CategorieController {
-	@Inject
-	CategorieFacade facade;
+	@Inject // Le DAO généré par netBeans
+	CategorieFacade dao;
 
 	@Inject
 	Models models;
 
 	@GET
 	public void show() {
-		models.put("categories", facade.findAll());
+		models.put("categories", dao.findAll());
 	}
-
 }
