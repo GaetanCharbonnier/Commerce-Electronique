@@ -1,6 +1,8 @@
 package controller;
 
 import comptoirs.model.dao.CategorieFacade;
+import comptoirs.model.entity.Categorie;
+import java.util.List;
 import javax.inject.Inject;
 import javax.mvc.Controller;
 import javax.mvc.Models;
@@ -22,6 +24,7 @@ public class CategorieController {
 
 	@GET
 	public void show() {
-		models.put("categories", dao.findAll());
+		List<Categorie> toutesLesCategories = dao.findAll();
+		models.put("categories", toutesLesCategories);
 	}
 }
