@@ -17,7 +17,7 @@ public class AllCategoriesService {
 	CategorieFacade facade;
 	
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public List<Categorie> allCategories() {
 		List<Categorie> result = facade.findAll();
 		return result;

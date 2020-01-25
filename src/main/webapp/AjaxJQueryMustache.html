@@ -25,15 +25,13 @@
 			function showResult(resultXML) {
 				console.log(resultXML); // On affiche dans la console les données reçues (XML)
 				var categories = XML2jsobj(resultXML.documentElement); // On convertit en objet JS
-				console.log(categories); // On affiche dabs la console
+				console.log(JSON.stringify(categories)); // On affiche dabs la console
 				// Le code source du template est dans la page
 				var template = $('#categoriesTemplate').html();
 				// On combine le template avec le résultat de la requête
-				var processedTemplate = Mustache.to_html(template, { records: categories.categorie });
+				var processedTemplate = Mustache.to_html(template, categories);
 				// On affiche le résultat dans la page
 				$('#tableCategories').html(processedTemplate);	
-				// On réactive le bouton
-				$("#doAjax").prop("disabled", false);
 			}
 
 			// Fonction qui traite les erreurs de la requête
@@ -49,8 +47,6 @@
 					success: showResult,
 					error: showError
 				});
-				// On désactive le bouton
-				$("#doAjax").prop("disabled", true);
 			}
 		</script>        
 	</head>
@@ -68,11 +64,11 @@
 			<TABLE BORDER="1">
 				{{! Un commentaire Mustache }}
 				<TR><TH>Code</TH><TH>Libelle</TH><TH>Description</TH></TR>
-				{{! Pour chaque enregistrement }}
-				{{#records}}
+				{{! Pour chaque categorie }}
+				{{#categorie}}
 					{{! Une ligne dans la table }}
 					<TR><TD>{{code}}</TD><TD>{{libelle}}</TD><TD>{{description}}</TD></TR>
-				{{/records}}
+				{{/categorie}}
 			</TABLE>
 		</script>	
 	</body>
