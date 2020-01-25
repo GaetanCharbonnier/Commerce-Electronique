@@ -1,6 +1,5 @@
 package comptoirs.model.entity;
 
-//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -20,14 +19,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "CATEGORIE")
 @XmlRootElement
-//@JsonIgnoreProperties("produitCollection")
 @NamedQueries({
 	@NamedQuery(name = "Categorie.findAll", query = "SELECT c FROM Categorie c"),
 	@NamedQuery(name = "Categorie.findByCode", query = "SELECT c FROM Categorie c WHERE c.code = :code"),
 	@NamedQuery(name = "Categorie.findByLibelle", query = "SELECT c FROM Categorie c WHERE c.libelle = :libelle"),
-	@NamedQuery(name = "Categorie.findByDescription", query = "SELECT c FROM Categorie c WHERE c.description = :description"),
-	@NamedQuery(name = "Categorie.unitesVendues", query = "SELECT cat.libelle, SUM(li.quantite) FROM Categorie cat LEFT JOIN cat.produitCollection p LEFT JOIN p.ligneCollection li GROUP BY cat.libelle" )}        
-)
+	@NamedQuery(name = "Categorie.findByDescription", query = "SELECT c FROM Categorie c WHERE c.description = :description")
+})
 public class Categorie implements Serializable {
 
 	private static final long serialVersionUID = 1L;

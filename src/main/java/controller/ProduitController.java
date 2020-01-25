@@ -48,6 +48,11 @@ public class ProduitController {
 		@FormParam("codeCategorie") Integer codeCategorie,
 		@FormParam("prixUnitaire") BigDecimal prixUnitaire ) 
 	{
+		// TODO : ce code est trop compliqué, fait trop de manipulations à la BD
+		// Il vaudrait mieux en faire une méthode dans un DAO
+		// TODO : gestion des exceptions
+		// Et si la catégorie n'existe pas ?
+		// Et si la création du produit échoue (nom en double, par exemple) ?
 		Categorie categorie = facadeC.find(codeCategorie);
 		Produit nouveau = new Produit();
 		nouveau.setNom(nom);

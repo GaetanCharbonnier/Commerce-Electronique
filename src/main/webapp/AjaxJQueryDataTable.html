@@ -34,7 +34,7 @@
 		// Afficher les ventes par client
 		function doAjax() {
 			$.ajax({
-				url: "mvc/allCategories",
+				url: "mvc/service/allCategories",
 				dataType: "xml",
 				success: // La fonction qui traite les résultats
 					function (result) {
@@ -58,7 +58,7 @@
 	<!-- Le graphique apparaît ici -->
 	<div id="table_div"></div>
 	<hr>
-	<a href='mvc/allCategories' target="_blank">Voir les données brutes (XML)</a>
+	<a href='mvc/service/allCategories' target="_blank">Voir les données brutes (XML)</a>
 	<hr>
 	<a href="./">Retour au menu</a>
 

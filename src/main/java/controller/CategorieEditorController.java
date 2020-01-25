@@ -42,7 +42,7 @@ public class CategorieEditorController {
 
 	@POST
 	@ValidateOnExecution(type = ExecutableType.ALL)	
-	public void create(@Valid @BeanParam final CategorieForm formData) {
+	public void create(@Valid @BeanParam CategorieForm formData) {
 		if ( ! formValidationErrors.isFailed()) { // Pas d'erreurs de saisie dans le formulaire
 			// On crée la nouvelle catégorie
 			Categorie nouvelle = new Categorie();

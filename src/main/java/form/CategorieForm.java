@@ -16,6 +16,13 @@ public class CategorieForm implements Serializable {
 	@Pattern(regexp = "[a-zA-Z0-9]+", message = "Uniquement des lettres ou des chiffres")
 	private String libelle;
 
+	@MvcBinding @FormParam("description")
+	@NotEmpty
+	@Size(max = 255)
+	private String description;
+
+	// Getters, setters
+	
 	public String getLibelle() {
 		return libelle;
 	}
@@ -23,11 +30,6 @@ public class CategorieForm implements Serializable {
 	public void setLibelle(final String libelle) {
 		this.libelle = libelle;
 	}
-
-	@MvcBinding @FormParam("description")
-	@NotEmpty
-	@Size(max = 255)
-	private String description;
 
 	public String getDescription() {
 		return description;

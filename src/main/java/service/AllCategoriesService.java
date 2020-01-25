@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import comptoirs.model.entity.Categorie;
 
 
-@Path("allCategories")
+@Path("service/allCategories")
 public class AllCategoriesService {
 	@Inject
 	CategorieFacade facade;
@@ -19,6 +19,7 @@ public class AllCategoriesService {
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public List<Categorie> allCategories() {
-		return facade.findAll();
+		List<Categorie> result = facade.findAll();
+		return result;
 	}
 }

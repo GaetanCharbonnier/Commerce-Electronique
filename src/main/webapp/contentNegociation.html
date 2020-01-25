@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Négociation de contenu</title>
+		<meta charset="UTF-8">
+
+		<!-- On charge la bibliothèque JQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+		<script>
+			$(document).ready(// Exécuté à la fin du chargement de la page
+				function () {
+					// Quand on clique sur le bouton doAjax, on exécute la fonction doRequest
+					$("#doAjaxXML").click(  doXMLRequest  );
+					$("#doAjaxJSON").click( doJSONRequest );
+				}
+			);
+
+			// Fonction qui traite les erreurs de la requête
+			function showError(xhr, status, message) {
+				$("#resultat").html("Erreur: " + status + " : " + message);
+			}
+
+			// Fonction qui fait l'appel AJAX XML
+			function doXMLRequest() {
+				$.ajax({
+					url: "mvc/service/unitesVendues/categories",
+					dataType: "xml",
+					success: showXMLResult,
+					error: showError
+				});
+			}
+
+			// Fonction qui affiche les résultats de la requête XML
+			function showXMLResult(resultXML) {
+				// On reçoit un objet 'XMLDocument', on le transforme en String
+				var text = new XMLSerializer().serializeToString(resultXML.documentElement);
+				$('#resultat').html(text);	
+			}
+
+			// Fonction qui fait l'appel AJAX JSON
+			function doJSONRequest() {
+				$.ajax({
+					url: "mvc/service/unitesVendues/categories",
+					dataType: "json",
+					success: showJSONResult,
+					error: showError
+				});
+			}
+
+			// Fonction qui affiche les résultats de la requête JSON
+			function showJSONResult(resultJSON) {
+				// On reçoit un objet javascript, on le transforme en String
+				var text = JSON.stringify(resultJSON);
+				$('#resultat').html(text);	
+			}
+
+			
+		</script>        
+	</head>
+	<body>
+		<h1>Exemple de négociation de contenu</h1>
+		<button id="doAjaxXML">Exécuter la requête AJAX (XML)</button><br> 
+		<button id="doAjaxJSON">Exécuter la requête AJAX (JSON)</button><br>
+		<textarea id="resultat" rows="15" cols="120">
+			...Le résultat va apparaître ici...
+		</textarea>
+		
+		<hr>
+		<a href="./">Retour au menu</a>		
+	</body>
+</html>

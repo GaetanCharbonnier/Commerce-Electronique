@@ -23,5 +23,5 @@
 			<input type='submit'>
 		</form>
 		<hr>
-		<a href="${pageContext.request.contextPath}">Retour au menu</a>
+		<a href="${pageContext.request.contextPath}/">Retour au menu</a>
 </html>

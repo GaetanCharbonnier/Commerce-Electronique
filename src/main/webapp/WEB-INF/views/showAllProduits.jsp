@@ -11,6 +11,7 @@
 
 <body>
 	<h1>Liste des produits</h1>
+	<a href="produits/create">Ajouter un nouveau produit</a>
 	<table border='1'>
 		<tr><th>Référence</th><th>Nom</th><th>Prix Unitaire</th><th>Catégorie</th></tr>
 		<%-- Pour chaque produit, une ligne dans la table HTML --%>
@@ -25,7 +26,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="${pageContext.request.contextPath}">Retour au menu</a>
+	<a href="${pageContext.request.contextPath}/">Retour au menu</a>
 </body>
 
 </html>

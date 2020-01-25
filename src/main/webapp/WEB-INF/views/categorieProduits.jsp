@@ -51,5 +51,5 @@
 			</c:forEach>
 		</table>
 		<hr>
-		<a href="${pageContext.request.contextPath}">Retour au menu</a>
+		<a href="${pageContext.request.contextPath}/">Retour au menu</a>
 </html>

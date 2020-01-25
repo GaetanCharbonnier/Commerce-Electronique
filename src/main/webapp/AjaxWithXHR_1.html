@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ajax avec XHR</title>
+		<meta charset="UTF-8">
+		<script>
+			function doRequest() {
+				// Attention à la compatibilité avec les vieux navigateurs
+				var xhr = new XMLHttpRequest();
+				document.getElementById("demo").innerHTML = "En attente...";
+				
+				// on spécifie le callback (fonction qui traite les résultats de la requête
+				xhr.onreadystatechange = xhrCallback;
+				
+				// On définit la requête à effectuer
+				xhr.open("GET", "loremIpsum.txt", true); // true : mode asynchrone
+				// On effectue la requête
+				xhr.send();
+			}	
+			
+			// Le callback
+			function xhrCallback() {
+				var message;
+				// cf. https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+				if (this.readyState === 4) { // La requête est terminée
+					if (this.status === 200) { // Code de retour OK
+						message = this.responseText; // responseText : la réponse en format texte
+					} else {
+						message = "Erreur, status : " + this.status + ", message : " + this.statusText;
+					}
+					// On met à jour la page avec les résultats de la requête
+					document.getElementById("demo").innerHTML = message;
+				}
+			}
+		</script>        
+	</head>
+	<body>
+		<h1>AJAX avec XHR</h1>
+		<button type="button" onclick="doRequest()">Exécuter la requête AJAX</button><br>
+		<h2>Le texte apparait ci-dessous</h2>
+		<pre id="demo"></pre>
+		<hr>
+		<a href="./">Retour au menu</a>				
+	</body>
+</html>
