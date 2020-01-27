@@ -1,7 +1,7 @@
 package form;
 
 import javax.mvc.binding.MvcBinding;
-import javax.validation.constraints.NotEmpty;
+//import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
@@ -17,8 +17,8 @@ public class CategorieForm implements Serializable {
 	private String libelle;
 
 	@MvcBinding @FormParam("description")
-	@NotEmpty
-	@Size(max = 255)
+	//@NotEmpty
+	@Size(min = 1, max = 255)
 	private String description;
 
 	// Getters, setters
