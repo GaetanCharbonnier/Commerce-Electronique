@@ -13,11 +13,11 @@
 			<property name="eclipselink.target-database" 
 				  value="org.eclipse.persistence.platform.database.DerbyPlatform"/>
 			<!-- Initialisation du schéma et des données à partir de scripts SQL  
-			<property name="javax.persistence.schema-generation.database.action" value="create"/>
+-->			<property name="javax.persistence.schema-generation.database.action" value="create"/>
 			<property name="javax.persistence.schema-generation.create-source" value="script"/>
 			<property name="javax.persistence.schema-generation.create-script-source" value="META-INF/comptoirs_schema_derby.sql"/>
 			<property name="javax.persistence.sql-load-script-source" value="META-INF/comptoirs_data.sql"/>
-			<property name="javax.persistence.schema-generation.drop-source" value="metadata"/>	
+			<property name="javax.persistence.schema-generation.drop-source" value="metadata"/>	<!--
 			-->
 			<!-- voir https://wiki.eclipse.org/EclipseLink/Examples/JPA/Logging -->         			
 			<property name="eclipselink.logging.level.sql" value="FINE"/>            			
