@@ -17,13 +17,12 @@
 		function drawPiechart(result) {
 			// On met le résultat au format attendu par google
 			var data = [['Produit', 'Unités vendues']];
-			result.forEach( ligne => data.push([ligne.libelle, ligne.unites]));
+			result.forEach(ligne => data.push([ligne.libelle, ligne.unites]));
 			var dataTable = google.visualization.arrayToDataTable(data);
-			var data = google.visualization.arrayToDataTable(data);
-			
+
 			var options = {title: 'Unités vendues par catégorie'};
 			var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-			chart.draw(data, options);
+			chart.draw(dataTable, options);
 		}
 
 		// Afficher les ventes par catégorie
@@ -48,8 +47,27 @@
 	<!-- Le graphique apparaît ici -->
 	<div id="piechart" style="width: 900px; height: 500px;"></div>
 	<hr>
-	<a href='mvc/service/unitesVenduesParCategorie' target="_blank">Voir les données brutes (JSON)</a>
+	<a href='mvc/service/unitesVendues/categories' target="_blank">Voir les données brutes (JSON)</a>
 	<hr>
 	<a href="./">Retour au menu</a>
-
+	<hr>
+	<h3>Code source</h3>
+	<ul>
+		<li>Couche "Accès aux données"
+			<ul>
+				<li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/java/comptoirs/model/dao/StatisticsDao.java"  target="_blank">Le DAO qui fait les requêtes</a></li>
+				<li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/java/comptoirs/model/dto/StatsResult.java"  target="_blank">le DTO qui représente les résultats des requêtes</a></li>
+			</ul>
+		</li>
+		<li>Couche "Web" 
+			<ul>
+				<li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/java/service/StatisticsService.java"  target="_blank">le web service qui transmet les résultats en JSON ou XML</a></li>
+			</ul>
+		</li> 
+		<li>Couche "Présentation"
+			<ul>
+				<li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/webapp/googlePieChart.html"  target="_blank">la page web qui fait l'appel AJAX et affiche le camembert (cette page)</a></li>
+			</ul>
+		</li>	
+	</ul>
 </body>

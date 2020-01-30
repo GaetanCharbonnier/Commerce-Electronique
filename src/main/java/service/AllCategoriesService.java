@@ -16,6 +16,11 @@ public class AllCategoriesService {
 	@Inject
 	CategorieFacade facade;
 	
+	/**
+	 * La sérialisation en JSON ne marche pas, pourquoi ?
+	 * Celui qui trouve la solution à 2 points de plus.
+	 * @return Toutes les catégories (en XML seulement pour le moment !)
+	 */
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public List<Categorie> allCategories() {

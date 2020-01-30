@@ -17,14 +17,13 @@
 		function drawTable(categorieArray) {
 			// On reformate le résultat comme un tableau
 			var chartData = [];
-			for (var i in categorieArray) {
-				chartData.push([categorieArray[i].code, categorieArray[i].description, categorieArray[i].libelle]);
-			}
+			categorieArray.forEach( categorie => chartData.push([parseInt(categorie.code), categorie.libelle, categorie.description]));
+
 
 			var data = new google.visualization.DataTable();
-			data.addColumn('string', 'Code');
-			data.addColumn('string', 'Description');
+			data.addColumn('number', 'Code');
 			data.addColumn('string', 'Libellé');
+			data.addColumn('string', 'Description');
 			data.addRows(chartData);
 
 			var table = new google.visualization.Table(document.getElementById('table_div'));

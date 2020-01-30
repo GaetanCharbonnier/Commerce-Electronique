@@ -32,8 +32,8 @@
 		</c:if>
 		<table border='1'>
 			<tr><th>Code</th><th>Libellé</th><th>Description</th></tr>
-					<%-- Pour chaque categorie, une ligne dans la table HTML --%>
-					<c:forEach var="categorie" items="${categories}">
+			<%-- Pour chaque categorie, une ligne dans la table HTML --%>
+			<c:forEach var="categorie" items="${categories}">
 				<tr>
 					<td>${categorie.code}</td>
 					<td>${mvc.encoders.html(categorie.libelle)}</td>
@@ -41,6 +41,7 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<hr>
 		<a href="${pageContext.request.contextPath}/">Retour au menu</a>
 	</body>
 </html>
