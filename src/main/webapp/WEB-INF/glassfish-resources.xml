@@ -11,7 +11,7 @@
 		<property name="serverName" value="localhost"/>
 		<property name="PortNumber" value="1527"/>
 		<property name="DatabaseName" value="comptoirs"/>
-		<property name="User" value="app"/>
+		<property name="User" value="gcharbon"/>
 		<property name="Password" value="app"/>
 	</jdbc-connection-pool>
 </resources>
