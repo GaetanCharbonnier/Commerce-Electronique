@@ -215,5 +215,13 @@ public class Client implements Serializable {
 	public String toString() {
 		return "comptoirs.model.entity.Client[ code=" + code + " ]";
 	}
+
+    void setEmail(String contact) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void setMotDePasse(String code) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	
 }
